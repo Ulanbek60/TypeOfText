@@ -1,0 +1,85 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY . /app
+RUN pip install --upgrade pip
+
+# Ставим все твои зависимости точными версиями
+RUN pip install \
+    altair==5.5.0 \
+    annotated-doc==0.0.3 \
+    annotated-types==0.7.0 \
+    anyio==4.11.0 \
+    attrs==25.4.0 \
+    blinker==1.9.0 \
+    cachetools==6.2.1 \
+    certifi==2025.10.5 \
+    charset-normalizer==3.4.4 \
+    click==8.3.0 \
+    fastapi==0.120.0 \
+    filelock==3.20.0 \
+    fsspec==2025.9.0 \
+    gitdb==4.0.12 \
+    GitPython==3.1.45 \
+    googletrans==4.0.2 \
+    h11==0.16.0 \
+    h2==4.3.0 \
+    hpack==4.1.0 \
+    httpcore==1.0.9 \
+    httpx==0.28.1 \
+    idna==3.11 \
+    Jinja2==3.1.6 \
+    jsonschema==4.25.1 \
+    jsonschema-specifications==2025.9.1 \
+    MarkupSafe==3.0.3 \
+    mpmath==1.3.0 \
+    narwhals==2.9.0 \
+    networkx==3.5 \
+    numpy==2.3.4 \
+    nvidia-cublas-cu12==12.1.3.1 \
+    nvidia-cuda-cupti-cu12==12.1.105 \
+    nvidia-cuda-nvrtc-cu12==12.1.105 \
+    nvidia-cuda-runtime-cu12==12.1.105 \
+    nvidia-cudnn-cu12==8.9.2.26 \
+    nvidia-cufft-cu12==11.0.2.54 \
+    nvidia-curand-cu12==10.3.2.106 \
+    nvidia-cusolver-cu12==11.4.5.107 \
+    nvidia-cusparse-cu12==12.1.0.106 \
+    nvidia-nccl-cu12==2.20.5 \
+    nvidia-nvjitlink-cu12==12.9.86 \
+    nvidia-nvtx-cu12==12.1.105 \
+    packaging==25.0 \
+    pandas==2.3.3 \
+    pillow==11.3.0 \
+    portalocker==3.2.0 \
+    protobuf==6.33.0 \
+    pyarrow==22.0.0 \
+    pydantic==2.12.3 \
+    pydantic_core==2.41.4 \
+    pydeck==0.9.1 \
+    python-dateutil==2.9.0.post0 \
+    pytz==2025.2 \
+    referencing==0.37.0 \
+    requests==2.32.5 \
+    rpds-py==0.28.0 \
+    six==1.17.0 \
+    smmap==5.0.2 \
+    sniffio==1.3.1 \
+    starlette==0.48.0 \
+    streamlit==1.50.0 \
+    sympy==1.14.0 \
+    tenacity==9.1.2 \
+    toml==0.10.2 \
+    torch==2.3.0 \
+    torchdata==0.9.0 \
+    torchtext==0.18.0 \
+    tornado==6.5.2 \
+    tqdm==4.67.1 \
+    typing-inspection==0.4.2 \
+    typing_extensions==4.15.0 \
+    tzdata==2025.2 \
+    urllib3==2.5.0 \
+    watchdog==6.0.0
+
+EXPOSE 8501
+CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
