@@ -1,19 +1,20 @@
-# Используем подходящий Python (например 3.12)
-FROM python:3.12-slim
+# Dockerfile
+FROM python:3.11-slim
 
-# Создаем рабочую директорию
 WORKDIR /app
 
-# Копируем весь проект внутрь контейнера
-COPY . /app
+# Копируем все зависимости
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Устанавливаем зависимости через pip
-RUN pip install --no-cache-dir torch==2.3.0 \
-    torchtext==0.18.0 torchdata==0.9.0 streamlit==1.50.0 \
-    numpy==2.3.4 pandas==2.3.3 altair==5.5.0
+# Копируем код приложения
+COPY . .
 
-# Открываем порт Streamlit
+# Streamlit слушает на 0.0.0.0:8501
+ENV STREAMLIT_SERVER_HEADLESS=true
+ENV STREAMLIT_SERVER_PORT=8501
+ENV STREAMLIT_SERVER_ENABLECORS=false
+
 EXPOSE 8501
 
-# Команда для запуска
-CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py"]

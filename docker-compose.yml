@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  textgenre:
+    build: .
+    container_name: textgenre_app
+    ports:
+      - "8501:8501"
+    deploy:
+      resources:
+        limits:
+          memory: 1g

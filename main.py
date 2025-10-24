@@ -43,12 +43,13 @@ def text_pipeline(text: str):
 # Streamlit
 st.title('Text Prediction')
 st.text('Напишите текст в жанре (технологии, любви, погоде), модель найдет, что это за жанр')
-text = st.text_area("Напишите что-нибудь 👇")
 
-if not text:
-    st.info('Напишите что-нибудь')
-else:
-    if st.button('Определить жанр текста'):
+st.text_input("Введите текст:", key="text")
+if st.button('Определить жанр текста'):
+    text = st.session_state.text  # получаем текст
+    if not text:
+        st.info('Напишите что-нибудь')
+    else:
         try:
             tensor = torch.tensor(text_pipeline(text), dtype=torch.int64).unsqueeze(0).to(device)
 
